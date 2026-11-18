@@ -1,0 +1,11 @@
+// Unindexed rules handle one layout; indexed rules handle layout lists.
+! layout = types
+  us_windows_intl = +windows_us_intl
+! layout[1] = types
+  us_windows_intl = +windows_us_intl
+! layout[2] = types
+  us_windows_intl = +windows_us_intl
+! layout[3] = types
+  us_windows_intl = +windows_us_intl
+! layout[4] = types
+  us_windows_intl = +windows_us_intl

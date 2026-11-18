@@ -1,0 +1,33 @@
+default partial alphanumeric_keys
+xkb_symbols "basic" {
+    include "us(intl)"
+    name[Group1] = "Windows US-International";
+    key <TLDE> { [ dead_grave, dead_tilde, VoidSymbol, VoidSymbol ] };
+    key <AE02> { [ 2, at, twosuperior, VoidSymbol ] };
+    key <AE03> { [ 3, numbersign, threesuperior, VoidSymbol ] };
+    key <AE05> { [ 5, percent, EuroSign, VoidSymbol ] };
+    key <AE06> { [ 6, dead_circumflex, onequarter, VoidSymbol ] };
+    key <AE07> { [ 7, ampersand, onehalf, VoidSymbol ] };
+    key <AE08> { [ 8, asterisk, threequarters, VoidSymbol ] };
+    key <AE09> { [ 9, parenleft, leftsinglequotemark, VoidSymbol ] };
+    key <AE10> { [ 0, parenright, rightsinglequotemark, VoidSymbol ] };
+    key <AE11> { [ minus, underscore, yen, VoidSymbol ] };
+    key <AD04> { [ r, R, registered, VoidSymbol ] };
+    key <AD11> { [ bracketleft, braceleft, guillemotleft, VoidSymbol ] };
+    key <AD12> { [ bracketright, braceright, guillemotright, VoidSymbol ] };
+    key <AC02> { type[Group1] = "WINDOWS_US_INTL_SEMIALPHABETIC", [ s, S, ssharp, section ] };
+    key <AC04> { [ f, F, VoidSymbol, VoidSymbol ] };
+    key <AC05> { [ g, G, VoidSymbol, VoidSymbol ] };
+    key <AC06> { [ h, H, VoidSymbol, VoidSymbol ] };
+    key <AC07> { [ j, J, VoidSymbol, VoidSymbol ] };
+    key <AC08> { [ k, K, VoidSymbol, VoidSymbol ] };
+    key <AC11> { [ dead_acute, dead_diaeresis, acute, diaeresis ] };
+    key <AB02> { [ x, X, VoidSymbol, VoidSymbol ] };
+    key <AB04> { [ v, V, VoidSymbol, VoidSymbol ] };
+    key <AB05> { [ b, B, VoidSymbol, VoidSymbol ] };
+    key <AB07> { type[Group1] = "WINDOWS_US_INTL_SEMIALPHABETIC", [ m, M, mu, VoidSymbol ] };
+    key <AB08> { type[Group1] = "WINDOWS_US_INTL_ALTGR_ALPHABETIC", [ comma, less, ccedilla, Ccedilla ] };
+    key <AB09> { [ period, greater, VoidSymbol, VoidSymbol ] };
+    key <AB10> { [ slash, question, questiondown, VoidSymbol ] };
+    key <LSGT> { [ backslash, bar, VoidSymbol, VoidSymbol ] };
+};
