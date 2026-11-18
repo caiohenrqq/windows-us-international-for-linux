@@ -1,40 +1,40 @@
 # Windows US-International for Linux
 
-Digitação parecida com o teclado **US-International do Windows**, usando Fcitx5 e XKB no Linux.
+Windows-style **US-International typing** on Linux, using Fcitx5 and XKB.
 
-Corrige `ć`, `ḿ` e `ś` inesperados. Mantém os acentos, evita a prévia destacada de `´` e deixa a primeira seta funcionar depois de um acento pendente. Não cria outro daemon.
+Fixes unexpected `ć`, `ḿ` and `ś` combinations. Keeps accents, hides the highlighted `´` preview and lets the first arrow key work after a pending accent. Does not add another daemon.
 
-| Digite em sequência | Resultado |
+| Type in sequence | Result |
 | --- | --- |
-| `'` e `e` | é |
-| `'` e `c` | ç |
-| `'` e `m` | `'m` |
-| `'` e `s` | `'s` |
-| `~` e `a` | ã |
-| `"` e `u` | ü |
-| Backtick e `e` | è |
-| `'` e Espaço | `'` |
+| `'` then `e` | é |
+| `'` then `c` | ç |
+| `'` then `m` | `'m` |
+| `'` then `s` | `'s` |
+| `~` then `a` | ã |
+| `"` then `u` | ü |
+| Backtick then `e` | è |
+| `'` then Space | `'` |
 
-Os cinco acentos continuam sendo teclas mortas. Pressionar só o acento espera a próxima tecla; não insere pontuação imediatamente.
+All five accents remain dead keys. Pressing an accent alone waits for the next key; it does not insert punctuation immediately.
 
-## Requisitos
+## Requirements
 
-- Linux com XKB e **Fcitx5 5.1.23 ou superior**, já funcionando na sessão.
-- Compilador C++20, Make, pkg-config e Python 3.10 ou superior.
-- libxkbcommon, xkeyboard-config, `xkbcli` e os cabeçalhos de desenvolvimento do Fcitx5.
-- Para a configuração automática do Hyprland: Omarchy com `~/.config/hypr/input.lua` em Lua.
+- Linux with XKB and **Fcitx5 5.1.23 or later**, already working in your session.
+- A C++20 compiler, Make, pkg-config and Python 3.10 or later.
+- libxkbcommon, xkeyboard-config, `xkbcli` and the Fcitx5 development headers.
+- For automatic Hyprland configuration: Omarchy with a Lua `~/.config/hypr/input.lua` file.
 
-No Arch Linux, as dependências de compilação estão nestes pacotes:
+On Arch Linux, these packages provide the build dependencies:
 
 ```sh
 sudo pacman -S --needed base-devel pkgconf python fcitx5 libxkbcommon xkeyboard-config
 ```
 
-Em outras distribuições, os cabeçalhos podem estar em pacotes separados, como `-dev` ou `-devel`.
+Other distributions may package development headers separately, usually in `-dev` or `-devel` packages.
 
-## Instalar
+## Install
 
-Na pasta do repositório:
+From the repository directory:
 
 ```sh
 make
@@ -43,9 +43,9 @@ python3 tools/install.py install --hyprland --dry-run
 python3 tools/install.py install --hyprland
 ```
 
-Execute o instalador **sem sudo**. O modo `--dry-run` apenas lista as mudanças.
+Run the installer **without sudo**. The `--dry-run` option only lists the planned changes.
 
-No Omarchy, ative os arquivos instalados:
+On Omarchy, activate the installed files:
 
 ```sh
 omarchy restart xcompose
@@ -53,51 +53,51 @@ hyprctl reload
 hyprctl configerrors
 ```
 
-Se um mapa anterior com o mesmo nome continuar em cache, encerrar e iniciar a sessão recarrega tudo. O instalador não encerra programas nem reinicia serviços automaticamente.
+If an older map with the same name remains cached, log out and back in to reload everything. The installer does not close applications or restart services automatically.
 
-### Outros compositores
+### Other compositors
 
-Instale sem `--hyprland`:
+Install without `--hyprland`:
 
 ```sh
 python3 tools/install.py install
 ```
 
-Depois selecione o layout XKB `us_windows_intl` no compositor e reinicie o Fcitx5 pela forma usada na sua sessão. A instalação não configura o método de entrada dos aplicativos.
+Then select the `us_windows_intl` XKB layout in your compositor and restart Fcitx5 using your session's usual method. The installer does not configure input-method integration for applications.
 
-## Usar
+## Use
 
-Use o teclado normalmente. A tecla Compose e seus atalhos existentes, incluindo os emojis do Omarchy, continuam disponíveis.
+Type normally. Your Compose key and existing shortcuts, including Omarchy's emoji sequences, remain available.
 
-- Setas, Home, End, Tab, Enter e Escape cancelam um acento pendente e seguem para o aplicativo.
-- Backspace cancela o acento pendente sem apagar o caractere anterior.
-- Trocar de campo ou usar um atalho com Ctrl, Alt ou Super cancela o acento pendente.
-- AltGr segue os níveis publicados pela Microsoft para US-International.
+- Arrow keys, Home, End, Tab, Enter and Escape cancel a pending accent and pass through to the application.
+- Backspace cancels a pending accent without deleting the previous character.
+- Switching fields or using a shortcut with Ctrl, Alt or Super cancels a pending accent.
+- AltGr follows Microsoft's published US-International key levels.
 
-Para conferir, digite em um campo novo:
+To check the behavior, type into an empty field:
 
 ```text
 é ç ã õ ê ü
 i'm it's don't i'll we'd we're
 ```
 
-O navegador precisa usar uma integração funcional com o Fcitx5. Alterar apenas o layout XKB não ativa essa integração. Não é necessário forçar Chromium para XWayland nas versões compatíveis com text-input-v3.
+Your browser needs working Fcitx5 integration. Changing the XKB layout alone does not enable it. Chromium versions with working text-input-v3 support do not need to be forced onto XWayland.
 
-## O que a instalação muda
+## What the installer changes
 
-Todos os arquivos ficam no usuário. O instalador:
+All files are installed for the current user. The installer:
 
-- Instala a extensão do Fcitx5 e o layout XKB.
-- Acrescenta um bloco ao arquivo Compose em uso, normalmente `~/.XCompose`, preservando o conteúdo anterior.
-- Preserva as regras XKB existentes e acrescenta o tipo necessário ao layout.
-- Com `--hyprland`, acrescenta o override ao `input.lua`, sem substituir o arquivo.
-- Guarda os originais em `~/.local/state/fcitx5-windows-us-intl`.
+- Installs the Fcitx5 addon and XKB layout.
+- Appends a block to the active Compose file, usually `~/.XCompose`, preserving its existing contents.
+- Preserves existing XKB rules and adds the types needed by the layout.
+- With `--hyprland`, appends an override to `input.lua` without replacing the file.
+- Saves the originals in `~/.local/state/fcitx5-windows-us-intl`.
 
-Os diretórios `XDG_CONFIG_HOME`, `XDG_DATA_HOME` e `XDG_STATE_HOME`, além de `XCOMPOSEFILE`, são respeitados. O instalador também reconhece um arquivo `$XDG_CONFIG_HOME/XCompose`. Ele recusa arquivos próprios já existentes e links simbólicos, em vez de sobrescrevê-los.
+The installer respects `XDG_CONFIG_HOME`, `XDG_DATA_HOME`, `XDG_STATE_HOME` and `XCOMPOSEFILE`. It also recognizes an existing `$XDG_CONFIG_HOME/XCompose` file. It refuses to overwrite existing addon or layout files and rejects symbolic links.
 
-## Remover
+## Uninstall
 
-Na mesma pasta do repositório:
+From the same repository directory:
 
 ```sh
 python3 tools/install.py uninstall
@@ -106,20 +106,20 @@ hyprctl reload
 hyprctl configerrors
 ```
 
-Fora do Omarchy, reinicie o Fcitx5 e recarregue o compositor da forma habitual.
+Outside Omarchy, restart Fcitx5 and reload your compositor as usual.
 
-A remoção restaura os originais e apaga os arquivos adicionados, os diretórios que ficaram vazios e o backup. Se algum arquivo tiver sido editado depois da instalação, ela para antes de restaurar qualquer arquivo. Preserve seus ajustes e consulte o backup para fazer a mesclagem; não apague o backup para contornar a verificação.
+Uninstalling restores the originals and removes added files, newly empty directories and the backup. If any managed file has changed since installation, it stops before restoring any files. Preserve your edits and use the backup to merge them; do not delete the backup to bypass the check.
 
-Para atualizar esta versão, remova a instalação anterior, execute `make clean`, compile novamente e instale. Uma instalação manual anterior precisa ser removida pelo seu próprio rollback antes de usar este instalador.
+To update this version, uninstall the previous installation, run `make clean`, rebuild and install again. An earlier manual installation must be removed using its own rollback before using this installer.
 
-Uma atualização incompatível do Fcitx5 pode exigir recompilar o addon.
+An incompatible Fcitx5 update may require rebuilding the addon.
 
-## Limites conhecidos
+## Known limitations
 
-- As regras Compose e a extensão se aplicam aos métodos `keyboard-*` do usuário, não apenas ao layout selecionado. O português brasileiro comum foi exercitado na implementação original, mas algumas combinações especiais passam a seguir as regras Windows.
-- Sequências com acentos diferentes continuam dependendo da tabela Compose existente.
-- A política de cancelamento com setas foi testada no Linux, não comparada lado a lado com um Windows.
-- Aplicativos que ignoram Fcitx5 ou recebem teclas diretamente podem ter outro comportamento.
-- Não há promessa de paridade completa com o Windows nem de compatibilidade com todas as distribuições.
+- The Compose rules and addon apply across the user's `keyboard-*` input methods, rather than being restricted to one layout. Common Brazilian Portuguese input was exercised with the original implementation, but some special combinations follow Windows rules.
+- Sequences containing different dead keys still depend on the existing Compose table.
+- Arrow-key cancellation was tested on Linux, without a side-by-side comparison with Windows.
+- Applications that bypass Fcitx5 or receive keys directly may behave differently.
+- Full Windows parity and compatibility with every distribution are not guaranteed.
 
-Veja [comportamento e testes](docs/testing.md) para os detalhes. Licença [MIT](LICENSE).
+See [behavior and testing](docs/testing.md) for details. Licensed under [MIT](LICENSE).
