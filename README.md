@@ -1,6 +1,8 @@
 # Windows US-International for Linux
 
-Windows-style **US-International typing** on Linux, using Fcitx5 and XKB.
+Windows-style **US-International typing for Omarchy**, using Fcitx5 and XKB.
+
+**Experimental:** intended for Omarchy with Lua-based Hyprland configuration and working Fcitx5 integration. Automated checks pass, but the refactored addon still needs a fresh graphical test pass before a stable release. Other distributions and desktop environments are outside the current support scope.
 
 Fixes unexpected `ć`, `ḿ` and `ś` combinations. Keeps accents, hides the highlighted `´` preview and lets the first arrow key work after a pending accent. Does not add another daemon.
 
@@ -19,18 +21,16 @@ All five accents remain dead keys. Pressing an accent alone waits for the next k
 
 ## Requirements
 
-- Linux with XKB and **Fcitx5 5.1.23 or later**, already working in your session.
+- Omarchy with XKB and **Fcitx5 5.1.23 or later**, already working in your session.
 - A C++20 compiler, Make, pkg-config and Python 3.10 or later.
 - libxkbcommon, xkeyboard-config, `xkbcli` and the Fcitx5 development headers.
-- For automatic Hyprland configuration: Omarchy with a Lua `~/.config/hypr/input.lua` file.
+- A Lua-based Hyprland configuration at `~/.config/hypr/input.lua`.
 
-On Arch Linux, these packages provide the build dependencies:
+On Omarchy, these Arch Linux packages provide the build dependencies:
 
 ```sh
 sudo pacman -S --needed base-devel pkgconf python fcitx5 libxkbcommon xkeyboard-config
 ```
-
-Other distributions may package development headers separately, usually in `-dev` or `-devel` packages.
 
 ## Install
 
@@ -45,7 +45,7 @@ python3 tools/install.py install --hyprland
 
 Run the installer **without sudo**. The `--dry-run` option only lists the planned changes.
 
-On Omarchy, activate the installed files:
+Activate the installed files:
 
 ```sh
 omarchy restart xcompose
@@ -54,16 +54,6 @@ hyprctl configerrors
 ```
 
 If an older map with the same name remains cached, log out and back in to reload everything. The installer does not close applications or restart services automatically.
-
-### Other compositors
-
-Install without `--hyprland`:
-
-```sh
-python3 tools/install.py install
-```
-
-Then select the `us_windows_intl` XKB layout in your compositor and restart Fcitx5 using your session's usual method. The installer does not configure input-method integration for applications.
 
 ## Use
 
@@ -106,8 +96,6 @@ hyprctl reload
 hyprctl configerrors
 ```
 
-Outside Omarchy, restart Fcitx5 and reload your compositor as usual.
-
 Uninstalling restores the originals and removes added files, newly empty directories and the backup. If any managed file has changed since installation, it stops before restoring any files. Preserve your edits and use the backup to merge them; do not delete the backup to bypass the check.
 
 To update this version, uninstall the previous installation, run `make clean`, rebuild and install again. An earlier manual installation must be removed using its own rollback before using this installer.
@@ -120,6 +108,6 @@ An incompatible Fcitx5 update may require rebuilding the addon.
 - Sequences containing different dead keys still depend on the existing Compose table.
 - Arrow-key cancellation was tested on Linux, without a side-by-side comparison with Windows.
 - Applications that bypass Fcitx5 or receive keys directly may behave differently.
-- Full Windows parity and compatibility with every distribution are not guaranteed.
+- Full Windows parity is not guaranteed. Support currently targets Omarchy; other distributions and desktop environments are unverified.
 
 See [behavior and testing](docs/testing.md) for details. Licensed under [MIT](LICENSE).

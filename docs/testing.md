@@ -1,5 +1,11 @@
 # Behavior and testing
 
+## Project status
+
+This is an experimental project targeting Omarchy with Lua-based Hyprland configuration and working Fcitx5 integration. The Arch Linux CI checks the build and automated suite; it does not certify an Omarchy graphical session. Other distributions and desktop environments are outside the current support scope.
+
+Before a stable release, repeat graphical tests with the refactored addon, verify installation and rollback on a separate Omarchy machine, and check behavior after logging out and back in.
+
 ## Input layers
 
 XKB defines keys and their Shift, AltGr and Caps Lock levels. The file in `data/xkb/symbols` inherits `us(intl)` and overrides levels that differ from Microsoft's layout.
